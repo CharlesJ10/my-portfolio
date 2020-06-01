@@ -112,9 +112,8 @@
 }
 
 .video-container {
-  height: 700px;
+  height: 90vh;
   width: 100%;
-  
 }
 
 .video-insert {
@@ -135,7 +134,7 @@
   font-size: 50px;
   align-items: center;
   text-align: end;
-  padding-top: 500px;
+  padding-top: 65vh;
 }
 
 h1 {
