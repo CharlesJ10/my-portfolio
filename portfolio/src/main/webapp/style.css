@@ -1,9 +1,113 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 11vh;
+  background-color: #e8e8e8;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
+}
+
+
+/* Style the logo */
+.logo a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 20px;
+  margin-left: 15px;
+    
+}
+
+.nav-links {
+  display: flex;
+  margin-right: 20px;
+  text-transform: uppercase; 
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 60%;
+   
+}
+
+.nav-links li {
+  list-style: none;
+  margin: 0;
+}
+
+/* Style the main nav elements */
+.nav-links a{
+  color: rgb(0, 0, 0);
+  display: block;
+  padding: 8px;
+  text-decoration: none;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Links on mouse-over */
+.logo:hover,
+.navbar-link:hover {
+  color: rgba(187, 46, 46, 0.2)
+}
+
+/*Style for the footer section*/
+.main-footer {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  background: #e8e8e8;
+  padding: 20px 0px;
+}
+
+/*Ensure the social media icons are well arranged*/
+.footer-social-icons {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.footer-social-icons ul {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  justify-content: space-between;
+}
+
+/*Design the horizontal layout of the social media icons*/
+.footer-social-icons ul li {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: 0px, 40px;
+  border-radius: 100%;
+  background: #add8e6;
+}
+
+.footer-social-icons ul li a {
+  font-size: 20px;
+  color: #484848;
+  display: block;
+}
+
+.footer-social-icons ul li a i {
+  line-height: 40px;
+}
+
+/*Enable hovering over icons*/
+.footer-social-icons ul li:hover {
+  background: cornsilk;
+}
+
+.main-footer h4 {
+  padding: 20px;
+  text-align: center;
+  font: bold 20px/40px;
 }
