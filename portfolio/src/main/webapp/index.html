@@ -21,7 +21,52 @@
         <li><a href="#footer" class="navbar-link">Contact</a></li>
       </ul>
 
+      <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars"></i>
+      </span> 
     </nav>
+    
+    <div class="video-container">
+      <video class="video-insert" autoplay muted loop>
+        <source src="/images/Website_Virtual_Background.mp4" type="video/mp4">
+      </video>
+      <h2>Welcome to my world!</h2>
+    </div>
+
+    <div id="content">
+      <h1>About Me</h1>
+      <hr>
+      <p>Hey! My name is <strong>Charles Ogbogu</strong>. I hope you are excited to learn about my journey!</p>
+      <p>I am an aspiring software and hardware engineer who revels in thoughts about technology relating to robotics, 
+      electrical components, artificial intelligence and so much more! Growing up from a less-privileged background,
+      I also ensure that I am aware of the impacts of various technologies globally.</p>
+      <p>Currently, I'm a rising sophomore at the <strong>University of Illinois, Springfield (2023) </strong> pursuing my 
+      Bachelor's degree in <strong>Computer Science and Mathematics </strong> (Who knows...I might also take on Information 
+      Systems Security since I find it enticing).</p>
+      <p>Also, I became a student athlete due to my love for soccer, but I am also interested in other sports such as basketball
+      as long as I enjoy it with friends.</p>
+
+      <hr>
+
+      <h2>A Peak Into My Humble Background</h2>
+      <p>Although I study in the United States, I was born in Lagos, Nigeria. While I was really young, my parents decided it was best for me 
+      to study abroad due to the academic funds I recieved. My educational jounrey began with Ghana then the United States.</p>
+      <p>As a result, I have lived in 3 different countries for periods longer than 3 years each (Yeah, I haven't really travelled that much). 
+      The experiences that I have gained throughout my journey has made my thought-process globally oriented and diverse. I am always ready to meet people from every part of the world, interact with them and learn from their adventures.</p>
+
+      <iframe class="personal-map" src="https://www.google.com/maps/d/u/0/embed?mid=1g8bszEHzBhef6q7elX11iCEbvRMG47ey" width="640" height="480"></iframe>
+      <hr>
+
+      <h2>Would you love to connect, collaborate, learn more or relate on similar experiences?</h2>
+      <p>Please don't hesitate to reach out to me at: <a href="mailto:chiderajnr@gmail.com" target="_blank">chiderajnr@gmail.com</a> 
+      or <a href="mailto:cogbo2@uis.edu" target="_blank">cogbo2@uis.edu</a></p>
+        
+      <img src = "/images/charles.jpeg" alt="A picture of Charles Ogbogu"/>
+      <p>Click here to get a random message:</p>
+      <button onclick="addRandomGreeting()">Hello</button>
+      <div id="greeting-container"></div>
+    </div>
+
 
     <div class="main-footer" id="footer">
       <div class="footer-social-icons">
@@ -35,6 +80,15 @@
         <h4>CHARLES CHIDERA OGBOGU  •  2020  •  charlesogbogu.com</h4>
       </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.navbar-toggle').click(function() {
+          $('ul').toggleClass('active');
+        })
+      })
+    </script>
 
   </body>
 </html>
