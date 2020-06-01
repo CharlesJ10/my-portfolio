@@ -111,6 +111,79 @@
   }
 }
 
+.video-container {
+  height: 700px;
+  width: 100%;
+  
+}
+
+.video-insert {
+  min-width: 100%;
+  min-height: 100%;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: -100;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.video-container h2 {
+  color: white;
+  font-size: 50px;
+  align-items: center;
+  text-align: end;
+  padding-top: 500px;
+}
+
+h1 {
+  margin: 30px;
+  text-align: center;
+  font-size: 40px;
+}
+
+p {
+  font-size: 16px;
+  margin: 20px;
+  padding: 10px;
+  line-height: 1.5;
+  width: 95%;
+  
+}
+
+h2 {
+  margin: 25px;
+  text-align: left;
+}
+
+#content {
+  margin: auto;
+  max-width: 800px;
+  align-content: center;
+}
+
+hr {
+  align-content: center;
+  border-top: 1px;
+  width: 90%;
+  padding-left: 10px;
+  color: #dcdcdc;
+  margin: 25px;
+}
+
+/*Style for map of places I have been to*/
+.personal-map {
+  margin: 25px 80px;
+  align-content: center;
+  width: -webkit-fill-available;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
 /*Style for the footer section*/
 .main-footer {
   width: 100%;
