@@ -237,3 +237,25 @@ hr {
   text-align: center;
   font: bold 20px/40px;
 }
+
+/*Style for the resume*/
+#resume-div {
+  width: 800px;
+  height: 1000px; 
+  align-content: center;
+  margin: auto;
+  padding: 30px 25px;
+}
+
+#resume-frame {
+  width: 100%;
+  height: 100%;
+  border: 20px solid lightslategrey;
+}
+
+/*Last date update of resume*/
+.resume-update {
+  width: 600px;
+  margin: auto;
+  align-content: center;
+}

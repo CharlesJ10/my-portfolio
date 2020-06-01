@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/0d47b72ee3.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <nav class="navbar">      
+      <div class="logo">
+        <h3><a href="#">Charles Ogbogu</a></h3>
+      </div>
+      <ul class="nav-links" id="js-menu">
+        <li><a href="index.html" class="navbar-link">About</a></li>
+        <li><a href="resume.html" class="navbar-link">Resume</a></li>
+        <li><a href="#" class="navbar-link">Experience</a></li>
+        <li><a href="#" class="navbar-link">Sport</a></li>
+        <li><a href="#footer" class="navbar-link">Contact</a></li>
+      </ul>
+
+      <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars"></i>
+      </span> 
+
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('.navbar-toggle').click(function() {
+              $('ul').toggleClass('active');
+          })
+        })
+
+      </script>
+    </nav>
+
+    <div class="resume-update">
+      <h1>RESUME (December 2019)</h1>
+      <h3>Interested in Software Engineering Roles(Internships) for Summer 2021</h4>
+    </div>
+
+    <div id="resume-div">
+      <iframe id="resume-frame" src="https://drive.google.com/file/d/1jcPQ7QvV60BI1_ytbSckM8ZKsge7ZKzj/preview"></iframe>    
+    </div>
+
+    <div class="main-footer" id="footer">
+      <div class="footer-social-icons">
+        <ul>
+          <li><a href="mailto:chiderajnr@gmail.com" target="_blank"><i class="fas fa-envelope-open-text"></i></a></li>
+          <li><a href="https://github.com/CharlesJ10" target="_blank"><i class="fab fa-github-square"></i></a></li>            
+          <li><a href="https://www.linkedin.com/in/charles-ogbogu" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+          <li><a href="https://www.instagram.com/charles_.j.r" target="_blank"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://www.twitter.com/CCharles_J" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        </ul>
+        <h4>CHARLES CHIDERA OGBOGU  •  2020  •  charlesogbogu.com</h4>
+      </div>
+    </div>
+  </body>
+</html>
+
