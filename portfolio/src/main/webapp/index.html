@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/0d47b72ee3.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body onload="getDisplayName()">
     <nav class="navbar">      
       <div class="logo">
         <h3><a href="#">Charles Ogbogu</a></h3>
@@ -62,6 +62,7 @@
       or <a href="mailto:cogbo2@uis.edu" target="_blank">cogbo2@uis.edu</a></p>
         
       <img src = "/images/charles.jpeg" alt="A picture of Charles Ogbogu"/>
+      <div id="name-container"></div>
       <p>Click here to get a random message:</p>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
