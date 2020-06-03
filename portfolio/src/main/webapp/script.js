@@ -30,5 +30,29 @@ function addRandomGreeting() {
 async function getDisplayName() {
   const response = await fetch('/data');
   const quote = await response.text();
+  console.log(quote);
   document.getElementById('name-container').innerText = quote;
+}
+
+function getDisplayContent() {
+  fetch('/data').then(response => response.json()).then((list) => {
+    // list is an arraylist containing strings, so we have to
+    // reference its elements to create HTML content
+    
+    const commentListElement = document.getElementById('name-container');
+    commentListElement.innerHTML = '';
+    commentListElement.appendChild(
+        createListElement('Introduction: ' + list[0]));
+    commentListElement.appendChild(
+        createListElement('Objective: ' + list[1]));
+    commentListElement.appendChild(
+        createListElement('Additional Comments: ' + list[2]));
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
