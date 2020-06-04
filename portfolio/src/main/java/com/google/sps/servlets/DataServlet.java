@@ -47,12 +47,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     // Get the input from the form.
-    String fName = request.getParameter("firstname");
-    String lName = request.getParameter("lastname");
-    String subject = request.getParameter("subject");
-    String message = request.getParameter("message");
+    String firstName = request.getParameter("firstname");
+    String lastName = request.getParameter("lastname");
+    String subjectText = request.getParameter("subject");
+    String messageDescritpion = request.getParameter("message");
 
-    String myUserComment = "Name: " + fName + " " + lName + "\n" + "Subject: " + subject + "\n" + message;
+    String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "Subject: " + subjectText + "\n" + messageDescritpion;
     storeCommentList.add(myUserComment);
 
     // Redirect back to the Contact page.
@@ -64,12 +64,11 @@ public class DataServlet extends HttpServlet {
    * @return the request parameter, or the default value if the parameter
    *         was not specified by the client
    */
-  private String getParameter( String name) {
-    String value = name;
-    if (value == null) {
+  private String getParameter(String info) {
+    if (info == null) {
       return "";
     }
-    return value;
+    return info;
   }
 }
 
