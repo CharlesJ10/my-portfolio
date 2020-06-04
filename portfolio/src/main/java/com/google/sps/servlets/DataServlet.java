@@ -14,6 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,50 +32,56 @@ import java.util.ArrayList; //To Enable Arraylist functionality through its clas
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  ArrayList<String> storeCommentList = new ArrayList<String>();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String json = convertToJsonUsingGson(storeCommentList);
+    Query query = new Query("UserComment").addSort("Timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    response.setContentType("application/json");
-    response.getWriter().println(json);
-  }
+    PreparedQuery results = datastore.prepare(query);
 
-  private String convertToJsonUsingGson(ArrayList storeCommentList) {
+    ArrayList<String> userCommentList = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      long id = (long) entity.getKey().getId();
+      String firstName = (String) entity.getProperty("FirstName");
+      String lastName = (String) entity.getProperty("LastName");
+      String subjectText = (String) entity.getProperty("Subject");
+      String messageDescription = (String) entity.getProperty("Message");
+      long timestamp = (long) entity.getProperty("Timestamp");
+
+      String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "ID: " + id + "\n Subject: " + subjectText + "\n" + messageDescription + "\n" + id;
+      userCommentList.add(myUserComment);
+    }
+
     Gson gson = new Gson();
-    String json = gson.toJson(storeCommentList);
-    return json;
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(userCommentList));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // Get the input from the form.
+    // Records input from the contact form.
     String firstName = request.getParameter("firstname");
     String lastName = request.getParameter("lastname");
     String subjectText = request.getParameter("subject");
-    String messageDescritpion = request.getParameter("message");
+    String messageDescription = request.getParameter("message");
+    long timestamp = System.currentTimeMillis();
 
-    String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "Subject: " + subjectText + "\n" + messageDescritpion;
-    storeCommentList.add(myUserComment);
+    // Initiate the Datastore service for storage of entity created
+    Entity commentEntity = new Entity("UserComment");
+    commentEntity.setProperty("FirstName", firstName);
+    commentEntity.setProperty("LastName", lastName);
+    commentEntity.setProperty("Subject", subjectText);
+    commentEntity.setProperty("Message", messageDescription);
+    commentEntity.setProperty("Timestamp", timestamp);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
 
     // Redirect back to the Contact page.
     response.sendRedirect("contact.html");
     
   }
-
-  /**
-   * @return the request parameter, or the default value if the parameter
-   *         was not specified by the client
-   */
-  private String getParameter(String info) {
-    if (info == null) {
-      return "";
-    }
-    return info;
-  }
 }
-
-
