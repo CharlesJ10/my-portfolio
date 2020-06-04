@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/0d47b72ee3.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body onload="getDisplayContent()">
     <nav class="navbar">      
       <div class="logo">
         <h3><a href="#">Charles Ogbogu</a></h3>
@@ -25,18 +25,36 @@
         <i class="fas fa-bars"></i>
       </span> 
     </nav>
-
-    <div id="content">
-        <div class="resume-update">
-        <h1>RESUME (December 2019)</h1>
-        <h3>Interested in Software Engineering Roles(Internships) for Summer 2021</h4>
-        </div>
-
-        <div id="resume-div">
-        <iframe id="resume-frame" src="https://drive.google.com/file/d/1jcPQ7QvV60BI1_ytbSckM8ZKsge7ZKzj/preview"></iframe>    
-        </div>
-    </div>
     
+    
+    <div class="contact-container">
+      <div class="contact-body">
+        <h1>CONTACT FORM</h1>
+        <h6>Please fill out the form below so that I could easily reach out to you</h6>
+      </div>    
+
+      <div class="form">
+        <form action="/data" method="POST">
+          <!-- Name -->
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name...">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+          <!-- Subject -->
+          <label for="subject">Subject</label>
+          <input type="text" id="title" name="subject" placeholder="Subject">
+          <label for="message"></label>
+          <textarea id="subject" name="message" placeholder="Message" style="height:170px"></textarea>
+
+          <!-- Send button for submission -->
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+        
+    </div>
+
+    <!-- Structure for the footer bar -->
     <div class="main-footer" id="footer">
       <div class="footer-social-icons">
         <ul>
@@ -61,4 +79,3 @@
 
   </body>
 </html>
-

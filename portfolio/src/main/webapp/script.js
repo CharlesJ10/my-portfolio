@@ -13,11 +13,11 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random greeting to the page: Will use later in developing webpage.
  */
 function addRandomGreeting() {
   const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+    ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -27,13 +27,6 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
-async function getDisplayName() {
-  const response = await fetch('/data');
-  const quote = await response.text();
-  console.log(quote);
-  document.getElementById('name-container').innerText = quote;
-}
-
 function getDisplayContent() {
   fetch('/data').then(response => response.json()).then((list) => {
     // list is an arraylist containing strings, so we have to
@@ -41,12 +34,11 @@ function getDisplayContent() {
     
     const commentListElement = document.getElementById('name-container');
     commentListElement.innerHTML = '';
-    commentListElement.appendChild(
-        createListElement('Introduction: ' + list[0]));
-    commentListElement.appendChild(
-        createListElement('Objective: ' + list[1]));
-    commentListElement.appendChild(
-        createListElement('Additional Comments: ' + list[2]));
+
+    for (i = 0; i < list.length; i++) {
+      commentListElement.appendChild(
+      createListElement(list[i]));
+    }
   });
 }
 
