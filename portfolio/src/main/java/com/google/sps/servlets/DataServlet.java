@@ -17,6 +17,9 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,16 +35,28 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // String json = convertToJsonUsingGson(storeCommentList);
+    Query query = new Query("UserComment").addSort("Timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    // response.setContentType("application/json");
-    // response.getWriter().println(json);
-  }
+    PreparedQuery results = datastore.prepare(query);
 
-  private String convertToJsonUsingGson(ArrayList storeCommentList) {
+    ArrayList<String> userCommentList = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      long id = (long) entity.getKey().getId();
+      String firstName = (String) entity.getProperty("FirstName");
+      String lastName = (String) entity.getProperty("LastName");
+      String subjectText = (String) entity.getProperty("Subject");
+      String messageDescription = (String) entity.getProperty("Message");
+      long timestamp = (long) entity.getProperty("Timestamp");
+
+      String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "ID: " + id + "\n Subject: " + subjectText + "\n" + messageDescription + "\n" + id;
+      userCommentList.add(myUserComment);
+    }
+
     Gson gson = new Gson();
-    String json = gson.toJson(storeCommentList);
-    return json;
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(userCommentList));
   }
 
   @Override
@@ -51,15 +66,15 @@ public class DataServlet extends HttpServlet {
     String firstName = request.getParameter("firstname");
     String lastName = request.getParameter("lastname");
     String subjectText = request.getParameter("subject");
-    String messageDescritpion = request.getParameter("message");
+    String messageDescription = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
     // Initiate the Datastore service for storage of entity created
-    Entity taskEntity = new Entity("Task");
+    Entity taskEntity = new Entity("UserComment");
     taskEntity.setProperty("FirstName", firstName);
     taskEntity.setProperty("LastName", lastName);
     taskEntity.setProperty("Subject", subjectText);
-    taskEntity.setProperty("Message", messageDescritpion);
+    taskEntity.setProperty("Message", messageDescription);
     taskEntity.setProperty("Timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
