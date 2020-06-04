@@ -258,3 +258,50 @@ hr {
   margin: auto;
   align-content: center;
 }
+
+/*Style for the contact form */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.contact-container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  width: 80%;
+  height: 80vh;
+  align-items: center;
+  margin: auto;
+  position: relative;
+}
+
+.contact-body h6 {
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .contact-container {
+    width: 100%;
+    flex-direction: column;
+  }
+}

@@ -26,13 +26,10 @@ import java.util.ArrayList; //To Enable Arraylist functionality through its clas
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  ArrayList<String> storeCommentList = new ArrayList<String>();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    ArrayList<String> storeCommentList = new ArrayList<String>();
-    storeCommentList.add("My name is Charles Ogbogu");
-    storeCommentList.add("I have learned so much in a short time and trying to test this program.");
-    storeCommentList.add("Who knows what I might learn tomorrow?");
 
     String json = convertToJsonUsingGson(storeCommentList);
 
@@ -45,5 +42,34 @@ public class DataServlet extends HttpServlet {
     String json = gson.toJson(storeCommentList);
     return json;
   }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    // Get the input from the form.
+    String firstName = request.getParameter("firstname");
+    String lastName = request.getParameter("lastname");
+    String subjectText = request.getParameter("subject");
+    String messageDescritpion = request.getParameter("message");
+
+    String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "Subject: " + subjectText + "\n" + messageDescritpion;
+    storeCommentList.add(myUserComment);
+
+    // Redirect back to the Contact page.
+    response.sendRedirect("contact.html");
+    
+  }
+
+  /**
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(String info) {
+    if (info == null) {
+      return "";
+    }
+    return info;
+  }
 }
+
 
