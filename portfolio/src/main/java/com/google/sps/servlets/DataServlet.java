@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,15 +29,13 @@ import java.util.ArrayList; //To Enable Arraylist functionality through its clas
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  ArrayList<String> storeCommentList = new ArrayList<String>();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String json = convertToJsonUsingGson(storeCommentList);
+    // String json = convertToJsonUsingGson(storeCommentList);
 
-    response.setContentType("application/json");
-    response.getWriter().println(json);
+    // response.setContentType("application/json");
+    // response.getWriter().println(json);
   }
 
   private String convertToJsonUsingGson(ArrayList storeCommentList) {
@@ -46,30 +47,26 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // Get the input from the form.
+    // Records input from the contact form.
     String firstName = request.getParameter("firstname");
     String lastName = request.getParameter("lastname");
     String subjectText = request.getParameter("subject");
     String messageDescritpion = request.getParameter("message");
+    long timestamp = System.currentTimeMillis();
 
-    String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "Subject: " + subjectText + "\n" + messageDescritpion;
-    storeCommentList.add(myUserComment);
+    // Initiate the Datastore service for storage of entity created
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("FirstName", firstName);
+    taskEntity.setProperty("LastName", lastName);
+    taskEntity.setProperty("Subject", subjectText);
+    taskEntity.setProperty("Message", messageDescritpion);
+    taskEntity.setProperty("Timestamp", timestamp);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
 
     // Redirect back to the Contact page.
     response.sendRedirect("contact.html");
     
   }
-
-  /**
-   * @return the request parameter, or the default value if the parameter
-   *         was not specified by the client
-   */
-  private String getParameter(String info) {
-    if (info == null) {
-      return "";
-    }
-    return info;
-  }
 }
-
-
