@@ -70,15 +70,15 @@ public class DataServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
 
     // Initiate the Datastore service for storage of entity created
-    Entity taskEntity = new Entity("UserComment");
-    taskEntity.setProperty("FirstName", firstName);
-    taskEntity.setProperty("LastName", lastName);
-    taskEntity.setProperty("Subject", subjectText);
-    taskEntity.setProperty("Message", messageDescription);
-    taskEntity.setProperty("Timestamp", timestamp);
+    Entity commentEntity = new Entity("UserComment");
+    commentEntity.setProperty("FirstName", firstName);
+    commentEntity.setProperty("LastName", lastName);
+    commentEntity.setProperty("Subject", subjectText);
+    commentEntity.setProperty("Message", messageDescription);
+    commentEntity.setProperty("Timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(taskEntity);
+    datastore.put(commentEntity);
 
     // Redirect back to the Contact page.
     response.sendRedirect("contact.html");
