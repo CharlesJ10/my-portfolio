@@ -12,34 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page: Will use later in developing webpage.
- */
-function addRandomGreeting() {
-  const greetings =
-    ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
-function getDisplayContent() {
-  fetch('/data').then(response => response.json()).then((list) => {
+// Handles both default and input values
+function getDisplayContentFromMaxValue(maxValue) {
+  fetch(`/data?comment-number=${maxValue}`).then(response => response.json()).then((list) => {
     // list is an arraylist containing strings, so we have to
     // reference its elements to create HTML content
     
     const commentListElement = document.getElementById('name-container');
     commentListElement.innerHTML = '';
 
-    for (i = 0; i < list.length; i++) {
+    var i;
+    for (i = 0; (i < list.length && i < maxValue); i++) {
       commentListElement.appendChild(
       createListElement(list[i]));
     }
   });
+}
+
+// Display number of comments with input value
+function getDisplayContentFromInput(event) {
+  event.preventDefault();
+  var maxValue = +document.getElementById("num-value").value;
+  console.log(typeof maxValue);
+
+  getDisplayContentFromMaxValue(maxValue);
+}
+
+// Displays default number of comments on page load
+function loadDisplayContent() {  
+  getDisplayContentFromMaxValue(3);
+}
+
+// Deletes the existing comments from webpage
+function deleteCommentContent() {
+  fetch('/delete-data').then(() => {
+    loadDisplayContent();
+  });
+  
 }
 
 /** Creates an <li> element containing text. */

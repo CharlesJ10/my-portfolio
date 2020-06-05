@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/0d47b72ee3.js" crossorigin="anonymous"></script>
   </head>
 
-  <body onload="getDisplayContent()">
+  <body onload="loadDisplayContent()">
     <nav class="navbar">      
       <div class="logo">
         <h3><a href="#">Charles Ogbogu</a></h3>
@@ -49,6 +49,19 @@
 
           <!-- Send button for submission -->
           <input type="submit" value="Submit">
+        </form>
+
+        <!-- View comments section -->
+        <form action="/data" method="GET">
+            <p>View the comment section below:</p>
+            <label for="comments">Max Number of Comments</label>
+            <input type="number" id ="num-value" name="comment-number" min="1" max="5" value="">
+            <button onclick="getDisplayContentFromInput(event)">Click Here</button>
+            <div id="name-container"></div>
+        </form>
+        <!-- Delete comments section -->
+        <form action="/delete-data" method="POST">
+            <button onclick="deleteCommentContent()">Delete</button>
         </form>
       </div>
         
