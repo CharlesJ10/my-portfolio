@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// Servlet sends mails to personal account by constructing emails from user info entered on the contact page
 @WebServlet("/mail")
 public class MailServlet extends HttpServlet {
   @Override
