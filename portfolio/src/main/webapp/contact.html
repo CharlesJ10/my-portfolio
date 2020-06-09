@@ -2,22 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
     <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/0d47b72ee3.js" crossorigin="anonymous"></script>
   </head>
 
   <body onload="loadDisplayContent()">
-    <nav class="navbar">      
-      <div class="logo">
-        <h3><a href="#">Charles Ogbogu</a></h3>
+    <nav id="navbar">      
+      <div id="logo">
+        <h3><a href="index.html">Charles Ogbogu</a></h3>
       </div>
       <ul class="nav-links" id="js-menu">
         <li><a href="index.html" class="navbar-link">About</a></li>
         <li><a href="resume.html" class="navbar-link">Resume</a></li>
-        <li><a href="#" class="navbar-link">Experience</a></li>
-        <li><a href="#" class="navbar-link">Sport</a></li>
+        <li><a href="experience.html" class="navbar-link">Experience</a></li>
+        <li><a href="sport.html" class="navbar-link">Sport</a></li>
         <li><a href="contact.html" class="navbar-link">Contact</a></li>
       </ul>
 
@@ -25,46 +27,58 @@
         <i class="fas fa-bars"></i>
       </span> 
     </nav>
-    
-    
-    <div class="contact-container">
-      <div class="contact-body">
-        <h1>CONTACT FORM</h1>
-        <h6>Please fill out the form below so that I could easily reach out to you</h6>
-      </div>    
 
-      <div class="form">
-        <form action="/data" method="POST">
-          <!-- Name -->
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="firstname" placeholder="Your name...">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 m-auto">
+          <div class="contact-form">
+            <h1>Get in Touch</h1>
+            <form action="/data" method="POST">
+              <div class="row">
+                <div class="col-50">
+                  <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input type="text" class="form-control" name="inputName" required>
+                  </div>
+                </div>
+                <div class="col-50">
+                  <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" name="inputEmail" required>
+                  </div>
+                </div>
+              </div>            
+              <div class="form-group">
+                <label for="inputSubject">Subject</label>
+                <input type="text" class="form-control" name="inputSubject" required>
+              </div>
+              <div class="form-group">
+                <label for="inputMessage">Message</label>
+                <textarea class="form-control" name="inputMessage" required></textarea>
+              </div>
+              <div class="button-center">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
+              </div>
+              <div class="dummy-button"> <!-- Temporary Button to test the mail servlet for sending mails -->
+                <button type="submit" formaction="/mail"><i class="fa fa-paper-plane"></i> Email</button>
+              </div>            
+            </form>
 
-          <!-- Subject -->
-          <label for="subject">Subject</label>
-          <input type="text" id="title" name="subject" placeholder="Subject">
-          <label for="message"></label>
-          <textarea id="subject" name="message" placeholder="Message" style="height:170px"></textarea>
-
-          <!-- Send button for submission -->
-          <input type="submit" value="Submit">
-        </form>
-
-        <!-- View comments section -->
-        <form action="/data" method="GET">
-            <p>View the comment section below:</p>
-            <label for="comments">Max Number of Comments</label>
-            <input type="number" id ="num-value" name="comment-number" min="1" max="5" value="">
-            <button onclick="getDisplayContentFromInput(event)">Click Here</button>
-            <div id="name-container"></div>
-        </form>
-        <!-- Delete comments section -->
-        <form action="/delete-data" method="POST">
-            <button onclick="deleteCommentContent()">Delete</button>
-        </form>
+            <!-- View comments section -->
+            <form action="/data" method="GET">
+              <p>View the comment section below:</p>
+              <label for="comments">Max Number of Comments</label>
+              <input type="number" id ="num-value" name="comment-number" min="1" max="5" value="">
+              <button onclick="getDisplayContentFromInput(event)">Click Here</button>
+              <div id="name-container"></div>
+            </form>
+            <!-- Delete comments section -->
+            <form action="/delete-data" method="POST">
+              <button onclick="deleteCommentContent()">Delete</button>
+            </form>
+          </div>
+        </div>
       </div>
-        
     </div>
 
     <!-- Structure for the footer bar -->

@@ -12,6 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "15px 10px";
+    document.getElementById("logo").style.fontSize = "20px";
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("navbar").style.padding = "65px 10px";
+    document.getElementById("logo").style.fontSize = "22px";
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 // Handles both default and input values
 function getDisplayContentFromMaxValue(maxValue) {
   fetch(`/data?comment-number=${maxValue}`).then(response => response.json()).then((list) => {
