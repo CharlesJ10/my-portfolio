@@ -56,15 +56,21 @@
       The experiences that I have gained throughout my journey has made my thought-process globally oriented and diverse. I am always ready to meet people from every part of the world, interact with them and learn from their adventures.</p>
 
       <iframe class="personal-map" src="https://www.google.com/maps/d/u/0/embed?mid=1g8bszEHzBhef6q7elX11iCEbvRMG47ey" width="640" height="480"></iframe>
+      
+      <!--The div element for the map -->
+      <div id="map"></div>
       <hr>
 
-      <h2>Would you love to connect, collaborate, learn more or relate on similar experiences?</h2>
-      <p>Please don't hesitate to reach out to me at: <a href="mailto:chiderajnr@gmail.com" target="_blank">chiderajnr@gmail.com</a> 
-      or <a href="mailto:cogbo2@uis.edu" target="_blank">cogbo2@uis.edu</a></p>
-
-      <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
-
-      <img src = "/images/charles.jpeg" alt="A picture of Charles Ogbogu"/>
+      <div id="contact-content">
+        <h2>Would you love to connect, collaborate, learn more or relate on similar experiences?</h2>
+        <p>Please don't hesitate to reach out to me at: <a href="mailto:chiderajnr@gmail.com" target="_blank">chiderajnr@gmail.com</a> 
+        or <a href="mailto:cogbo2@uis.edu" target="_blank">cogbo2@uis.edu</a></p>
+        <div>
+          <img src = "/images/charles.jpeg" alt="A picture of Charles Ogbogu" id="personal-image"/>
+        </div>
+        <a href="contact.html"><button id="contact-button">CONTACT ME <i class="far fa-paper-plane"></i></button></a>
+        <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+      </div>
     </div>
 
 
@@ -88,6 +94,10 @@
           $('ul').toggleClass('active');
         })
       })
+    </script>
+
+    <!-- Replace the value of the key parameter with your own API key. -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVWcrVarrssVpbfAm6grRd_NBiC1anL3c&callback=initMap">
     </script>
 
   </body>

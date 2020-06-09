@@ -78,3 +78,14 @@ function createListElement(text) {
   liElement.innerText = text;
   return liElement;
 }
+
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var chicago = {lat: 41.8781, lng: -87.6298};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: chicago});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: chicago, map: map});
+}
