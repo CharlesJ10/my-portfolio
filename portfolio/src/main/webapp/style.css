@@ -4,25 +4,32 @@
   margin: 0;
 }
 
-.navbar {
+#navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 11vh;
   background-color: #e8e8e8;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding-left: 10px;
+  padding: 65px 10px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: 0.4s;
+  z-index: 99;
+  overflow: hidden;
 }
 
 
 /* Style the logo */
-.logo a {
+#logo a {
   text-decoration: none;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 20px;
+  font-size: 22px;
   margin-left: 15px;
+  transition: 0.4s;
     
 }
 
@@ -53,7 +60,7 @@
 }
 
 /* Links on mouse-over */
-.logo:hover,
+#logo:hover,
 .navbar-link:hover {
   color: rgba(187, 46, 46, 0.2)
 }
@@ -66,9 +73,8 @@
 /*Make navigaition bar responsive to moblie view*/
 @media screen and (max-width: 768px) {
 
-  .navbar {
-    padding-left: 10px;
-    padding-top: 40px;
+  #navbar {
+    padding: 40px 10px !important; /* Use !important to make sure that JavaScript doesn't override the padding on small screens */
     flex-direction: column;
     align-items: flex-start;
   }
@@ -79,7 +85,7 @@
     width: 100%;
   }
 
-  .logo,
+  #logo,
   .navbar-link {
     text-decoration: none;
   }
@@ -89,7 +95,7 @@
     text-align: center;
   }
 
-  .logo a {
+  #logo a {
     color: rgba(3, 3, 3, 0.8);
     display: inline-block;
     font-size: 20px;
@@ -111,6 +117,7 @@
   }
 }
 
+/* Style for video on landing page */
 .video-container {
   height: 90vh;
   width: 100%;
@@ -137,6 +144,7 @@
   padding-top: 65vh;
 }
 
+
 h1 {
   margin: 30px;
   text-align: center;
@@ -157,8 +165,11 @@ h2 {
   text-align: left;
 }
 
+/* Style for page content */
 #content {
   margin: auto;
+  padding-top: 140px;
+  padding-bottom: 20px;
   max-width: 800px;
   align-content: center;
 }
@@ -190,6 +201,7 @@ hr {
   margin: auto;
   background: #e8e8e8;
   padding: 20px 0px;
+  position: relative;
 }
 
 /*Ensure the social media icons are well arranged*/
@@ -239,11 +251,11 @@ hr {
 
 /*Style for the resume*/
 #resume-div {
-  width: 800px;
-  height: 1000px; 
+  width: 80%;
+  height: 900px; 
   align-content: center;
   margin: auto;
-  padding: 30px 25px;
+  padding: 40px 25px;
 }
 
 #resume-frame {
@@ -254,13 +266,13 @@ hr {
 
 /*Last date update of resume*/
 .resume-update {
-  width: 600px;
+  width: 80%;
   margin: auto;
   align-content: center;
 }
 
 /*Style for the contact form */
-input[type=text], select, textarea {
+input[type=text], input[type=email], textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -269,39 +281,147 @@ input[type=text], select, textarea {
   resize: vertical;
 }
 
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-}
 
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-/* Style the container/contact section */
-.contact-container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 10px;
-  width: 80%;
-  height: 80vh;
-  align-items: center;
+.container {
   margin: auto;
-  position: relative;
+  height: 1100px;
 }
 
-.contact-body h6 {
+form {
+  overflow: hidden;
+  padding: 5px;
+  width: 700px; 
+  margin: auto;
+  align-content: center;
+}
+
+.contact-form {
+  margin-top: 110px;
+  padding: 160px 160px;
+  background-color: #fcda2e !important;
+  height: 1100px;
+  overflow: auto;
+}	
+.contact-form h1 {
+  font-size: 42px;
+  font-family: 'Pacifico', sans-serif;
+  margin: 0 0 50px;
   text-align: center;
-  font-size: 24px;
+}
+.contact-form .form-group {
+  margin-bottom: 20px;
+  padding: 0px 20px;
+}
+.contact-form .form-control, .contact-form {
+  min-height: 38px;
+  border-radius: 2px;
+  width: 100%;
+  display: block;
+}
+
+.btn {
+  min-height: 38px;
+  border-radius: 2px;
+  align-self: center;
+}
+.button-center {
+  text-align-last: center;
+}
+.contact-form .form-control {
+	border-color: #e2c705;
+}
+.contact-form .form-control:focus {
+	border-color: #d8b012;
+	box-shadow: 0 0 8px #dcae10;
+}
+.contact-form .btn-primary {
+  width: 50%;
+  color: #fcda2e;
+  background: #000;
+  margin-top: 20px;
+  border: none;
+}
+.contact-form .btn-primary:hover {
+  color: #fff; 
+}
+.contact-form .btn-primary i {
+  margin-right: 5px;
+}
+
+.contact-form textarea {
+  height: 14vh;
+  resize: vertical;
+}
+.bs-example {
+  margin: 20px;
+}
+
+.col-50 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .contact-container {
+  .col-50, input[type=submit] {
     width: 100%;
-    flex-direction: column;
+    margin-top: 10px;
   }
+  .contact-form {
+    padding: 50px 10px;
+  }
+  form {
+    overflow: hidden;
+    padding: 5px;
+    width: 350px; 
+    margin: auto;
+    align-content: center;
+  }
+
+}
+
+/* Style for back to top button */
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+/* Style for experience and sport pages */
+.main-content {
+  background-color:  #add8e6;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 90vh;
+  margin: auto;
+  padding: 100px;
+  top: 100px;
+  position: relative;
+}
+
+.main-content h2 {
+  text-align: center;
+  font: bold 40px/30px Arial, sans-serif;
+
+}
+
+.main-content h4 {
+  text-align: center;
+  font: italic 30px/50px Georgia, serif;
 }

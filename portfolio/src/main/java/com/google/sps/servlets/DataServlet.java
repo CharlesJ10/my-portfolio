@@ -46,13 +46,13 @@ public class DataServlet extends HttpServlet {
 
     for (Entity entity : results.asIterable()) {
       long id = (long) entity.getKey().getId();
-      String firstName = (String) entity.getProperty("FirstName");
-      String lastName = (String) entity.getProperty("LastName");
+      String userName = (String) entity.getProperty("Name");
+      String userEmail = (String) entity.getProperty("Email");
       String subjectText = (String) entity.getProperty("Subject");
       String messageDescription = (String) entity.getProperty("Message");
       long timestamp = (long) entity.getProperty("Timestamp");
 
-      String myUserComment = "Name: " + firstName + " " + lastName + "\n" + "ID: " + id + "\n Subject: " + subjectText + "\n" + messageDescription + "\n" + timestamp;
+      String myUserComment = "Name: " + userName + "\n" + "ID: " + id + "\nEmail: " + userEmail + " \nSubject: " + subjectText + "\n" + messageDescription + "\n" + timestamp;
       userCommentList.add(myUserComment);
     }
 
@@ -66,23 +66,23 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     // Records input from the contact form.
-    String firstName = request.getParameter("firstname");
-    String lastName = request.getParameter("lastname");
-    String subjectText = request.getParameter("subject");
-    String messageDescription = request.getParameter("message");
+    String userName = request.getParameter("inputName");
+    String userEmail = request.getParameter("inputEmail");
+    String subjectText = request.getParameter("inputSubject");
+    String messageDescription = request.getParameter("inputMessage");
     long timestamp = System.currentTimeMillis();
 
     // Initiate the Datastore service for storage of entity created
     
     Entity commentEntity = new Entity("UserComment");
-    commentEntity.setProperty("FirstName", firstName);
-    commentEntity.setProperty("LastName", lastName);
+    commentEntity.setProperty("Name", userName);
+    commentEntity.setProperty("Email", userEmail);
     commentEntity.setProperty("Subject", subjectText);
     commentEntity.setProperty("Message", messageDescription);
     commentEntity.setProperty("Timestamp", timestamp);
     
     // Ensure and avoid all empty entry values
-    if (!"".equals(firstName) && !"".equals(lastName)) { // Yoda expression to avoid null pointers by using .equals to compare strings in Java
+    if (!"".equals(userName) && !"".equals(userEmail)) { // Yoda expression to avoid null pointers by using .equals to compare strings in Java
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
     } else {
