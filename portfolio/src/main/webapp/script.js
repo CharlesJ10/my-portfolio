@@ -79,13 +79,102 @@ function createListElement(text) {
   return liElement;
 }
 
+// Holds all points on the map
+var mapPoints = []; 
+
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var chicago = {lat: 41.8781, lng: -87.6298};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: chicago});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: chicago, map: map});
+
+  // Locations shown when page is loaded
+  var locations = [
+      ['Chicago, U.S.', 41.8781, -87.6298],
+      ['Springfield, U.S.', 39.799999, -89.650002],
+      ['Lagos, Nigeria', 6.465422, 3.406448],
+      ['Accra, Ghana', 5.550000, -0.020000],
+      ['Doha, Qatar', 25.286106, 51.534817]
+  ];
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var bounds = new google.maps.LatLngBounds();
+
+  var infoWindow = new google.maps.InfoWindow();
+
+  var marker, i;
+
+  for (i = 0; i < locations.length; i++) {  
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map,
+      animation: google.maps.Animation.DROP
+    });
+
+    // Extends the map to include all points
+    mapPoints.push(marker);
+    bounds.extend(marker.position);
+
+    
+    // Opens the info window for each hard-coded marker
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        toggleBounce(marker);
+        infoWindow.setContent(locations[i][0]);
+        infoWindow.open(map, marker);
+        setTimeout(toggleBounce(marker), 1000);
+      }
+    })(marker, i));
+  }
+
+  var userMarker;
+  // Implementation of HTML5 geolocation for each user if given permission.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      // Create user marker
+      userMarker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      animation: google.maps.Animation.DROP
+      });
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found. <br>Lat: '+pos.lat+'<br>Long: '+pos.lng);
+      infoWindow.open(map, userMarker);
+      bounds.extend(userMarker.position);
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+  // Auto centers map to fit all markers
+  map.fitBounds(bounds);
+
+  // Enable bouncing of markers
+  function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
 }
+
+// Checks for errors with Geolocation
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.open(map);
+}
+

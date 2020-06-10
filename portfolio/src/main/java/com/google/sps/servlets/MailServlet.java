@@ -47,14 +47,13 @@ public class MailServlet extends HttpServlet {
 
     try {
       Message msg = new MimeMessage(session);
-      msg.setFrom(new InternetAddress(userEmail, userName));
+      msg.setFrom(new InternetAddress("noreply@charlesogbogu-step-2020.appspotmail.com", userName));
       msg.addRecipient(Message.RecipientType.TO, new InternetAddress("chiderajnr@gmail.com", "Charles Ogbogu"));
       msg.setSubject(subjectText);
-      msg.setText(messageDescription);
+      msg.setText(userName + "\n\n" + userEmail +"\n\n" + messageDescription);
       Transport.send(msg);
     } catch (AddressException e) {
       System.err.println("Email Address was invalid");
-
     } catch (MessagingException e) {
       System.err.println("There was an error contacting the mail service.");
     } catch (UnsupportedEncodingException e) {
