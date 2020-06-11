@@ -139,15 +139,15 @@ function initMap() {
 
       // Create user marker
       userMarker = new google.maps.Marker({
-      position: pos,
-      map: map,
-      animation: google.maps.Animation.DROP
+        position: pos,
+        map: map,
+        animation: google.maps.Animation.DROP
       });
 
       infoWindow.setPosition(pos);
       infoWindow.setContent('Location found. <br>Lat: '+pos.lat+'<br>Long: '+pos.lng);
       infoWindow.open(map, userMarker);
-      bounds.extend(userMarker.position);
+      map.setCenter(pos);
 
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -157,8 +157,15 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
-  // Auto centers map to fit all markers
-  map.fitBounds(bounds);
+  map.addListener('center_changed', function() {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+    window.setTimeout(function() {
+    // Auto centers map to fit all markers
+    map.fitBounds(bounds);
+    }, 15000);
+  });
+  
 
   // Enable bouncing of markers
   function toggleBounce(marker) {
