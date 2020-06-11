@@ -15,6 +15,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -42,6 +45,15 @@ public class MailServlet extends HttpServlet {
     String subjectText = request.getParameter("inputSubject");
     String messageDescription = request.getParameter("inputMessage");
     
+    // Implementation of sentiment analysis for opinion mining
+    Document doc = Document.newBuilder().setContent(messageDescription).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    float score = sentiment.getScore();
+    float magnitude = sentiment.getMagnitude();
+    languageService.close();
+
+    // Implementation of Mail API
     Properties props = new Properties();
     Session session = Session.getDefaultInstance(props, null);
 
@@ -50,7 +62,7 @@ public class MailServlet extends HttpServlet {
       msg.setFrom(new InternetAddress("noreply@charlesogbogu-step-2020.appspotmail.com", userName));
       msg.addRecipient(Message.RecipientType.TO, new InternetAddress("chiderajnr@gmail.com", "Charles Ogbogu"));
       msg.setSubject(subjectText);
-      msg.setText(userName + "\n\n" + userEmail +"\n\n" + messageDescription);
+      msg.setText("Name: " + userName + "\n\n" + "Email: " + userEmail +"\n\n" + "Sentiment Score: " + score + ". Magnitude Score: " + magnitude + "\n\n" + messageDescription);
       Transport.send(msg);
     } catch (AddressException e) {
       System.err.println("Email Address was invalid");
