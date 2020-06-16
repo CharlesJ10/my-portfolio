@@ -50,4 +50,14 @@ public final class GreeterTest {
     //Whitespace and Special characters should be removed
     Assert.assertEquals("Hello Ada", greeting);
   }
+
+  @Test
+  public void testGreetingWithMoreThanOneFirstName() {
+    Greeter greeter = new Greeter();
+
+    String greeting = greeter.greet("   @$Ada Rose#%   ");
+
+    //Whitespace and Special characters should be removed
+    Assert.assertEquals("Hello Ada Rose", greeting);
+  }
 }
