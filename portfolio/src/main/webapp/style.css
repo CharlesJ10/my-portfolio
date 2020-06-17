@@ -11,7 +11,7 @@
   min-height: 11vh;
   background-color: #e8e8e8;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 65px 10px;
+  padding: 50px 10px;
   position: fixed;
   width: 100%;
   top: 0;
@@ -140,10 +140,10 @@
 
 .video-container h2 {
   color: white;
-  font-size: 50px;
+  font-size: 40px;
   align-items: center;
   text-align: end;
-  padding-top: 65vh;
+  padding-top: 60vh;
 }
 
 @media screen and (max-width: 768px) {
