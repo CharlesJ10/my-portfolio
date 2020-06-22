@@ -26,7 +26,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "20px";
     document.getElementById("myBtn").style.display = "block";
   } else {
-    document.getElementById("navbar").style.padding = "65px 10px";
+    document.getElementById("navbar").style.padding = "50px 10px";
     document.getElementById("logo").style.fontSize = "22px";
     document.getElementById("myBtn").style.display = "none";
   }
